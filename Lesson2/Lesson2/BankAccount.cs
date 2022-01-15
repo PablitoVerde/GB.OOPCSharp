@@ -15,6 +15,9 @@ using System.Text;
 Каждый конструктор должен вызывать метод, генерирующий номер счета.
 
 4. В классе все методы для заполнения и получения значений полей заменить на свойства. Написать тестовый пример.
+
+5. * Добавить в класс счет в банке два метода: снять со счета и положить на счет. Метод снять со счета проверяет, 
+возможно ли снять запрашиваемую сумму, и в случае положительного результата изменяет баланс.
 */
 
 
@@ -37,21 +40,21 @@ namespace Lesson2
 
         public BankAccount(double balance)
         {
-            clientAccountNumber = GenerateAccountNumber();
+            ClientAccountNumber = GenerateAccountNumber();
             Balance = balance;
             TypeAccount = TypeAccount.current;
         }
 
         public BankAccount(TypeAccount typeAccount)
         {
-            clientAccountNumber = GenerateAccountNumber();            
-            TypeAccount = typeAccount;          
+            ClientAccountNumber = GenerateAccountNumber();
+            TypeAccount = typeAccount;
             Balance = 0;
         }
 
         public BankAccount(double balance, TypeAccount typeAccount)
         {
-            clientAccountNumber = GenerateAccountNumber();
+            ClientAccountNumber = GenerateAccountNumber();
             Balance = balance;
             TypeAccount = typeAccount;
         }
@@ -64,23 +67,26 @@ namespace Lesson2
 
         public void AddBalance(double sum)
         {
-            balance += sum;
+            double balance = Balance;
+            balance = balance + sum;
+            Balance = balance;
+        }
+
+        public void WithdrawFromBalance(double sum)
+        {
+            if (Balance > sum)
+            {
+                double withdraw = -sum;
+                AddBalance(withdraw);
+            }
+            else
+                Console.WriteLine("Произошла ошибка. Снятие денег невозможно. Недостаточно средств на счете");
         }
 
 
         public int ClientAccountNumber { get; set; }
         public double Balance { get; set; }
         public TypeAccount TypeAccount { get; set; }
-
-        public int GetAccountNumber()
-        {
-            return clientAccountNumber;
-        }
-
-        public double GetAccountBalance()
-        {
-            return this.balance;
-        }
 
         public void PrintAccountInfo()
         {
@@ -95,7 +101,7 @@ namespace Lesson2
             else
                 _typeAccount = "Тип счета не определен";
 
-            Console.WriteLine($"Новый счет: {clientAccountNumber}. Состояние баланса: {GetAccountBalance()}. Тип счета: {_typeAccount}");
+            Console.WriteLine($"Новый счет: {ClientAccountNumber}. Состояние баланса: {Balance}. Тип счета: {_typeAccount}");
         }
 
     }

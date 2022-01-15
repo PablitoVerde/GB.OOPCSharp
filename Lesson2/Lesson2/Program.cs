@@ -18,8 +18,15 @@ namespace Lesson2
             secondBankAccount.PrintAccountInfo();
 
             TypeAccount thirdClientTypeAccount = TypeAccount.deposit;
-            BankAccount thirdBankAccount = new BankAccount(thirdClientTypeAccount);
-            thirdBankAccount.PrintAccountInfo();          
+            BankAccount thirdBankAccount = new BankAccount(thirdClientTypeAccount);                   
+            thirdBankAccount.PrintAccountInfo();
+
+
+            firstBankAccount.AddBalance(100);
+            firstBankAccount.PrintAccountInfo();
+            firstBankAccount.WithdrawFromBalance(400);
+            firstBankAccount.PrintAccountInfo();
+            firstBankAccount.WithdrawFromBalance(5000);
 
             Console.ReadKey();
         }
