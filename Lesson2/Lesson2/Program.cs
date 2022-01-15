@@ -8,33 +8,18 @@ namespace Lesson2
         {
             Console.WriteLine("Программа банковских счетов");
 
-            BankAccount ba = new BankAccount();
-            ba.AddAccountNumber();
+            double firstClientBalance = 1234;
+            BankAccount firstBankAccount = new BankAccount(firstClientBalance);
+            firstBankAccount.PrintAccountInfo();
 
-            Console.WriteLine($"Создан номер счета {ba.GetAccountNumber()}");
+            double secondClientBalance = 5345;
+            TypeAccount secondClientTypeAccount = TypeAccount.current;
+            BankAccount secondBankAccount = new BankAccount(secondClientBalance, secondClientTypeAccount);
+            secondBankAccount.PrintAccountInfo();
 
-            Console.WriteLine("Введите баланс");
-            ba.AddBalance(Convert.ToDouble(Console.ReadLine()));
-
-            Console.WriteLine("Введите тип счета: 1. Депозитный 2. Расчетный 3. Кредитный");
-            int i = Convert.ToInt32(Console.ReadLine());
-            if (i == 1)
-            {
-                TypeAccount ta = TypeAccount.deposit;
-                ba.ChangeTypeAccount(ta);
-            }
-            else if (i == 2)
-            {
-                TypeAccount ta = TypeAccount.current;
-                ba.ChangeTypeAccount(ta);
-            }
-            else if (i == 3)
-            {
-                TypeAccount ta = TypeAccount.credit;
-                ba.ChangeTypeAccount(ta);
-            }
-
-            Console.WriteLine($"Новый счет: {ba.GetAccountNumber()}. Состояние баланса: {ba.GetAccountBalance()}. Тип счета: {ba.GetTypeAccount()}");
+            TypeAccount thirdClientTypeAccount = TypeAccount.deposit;
+            BankAccount thirdBankAccount = new BankAccount(thirdClientTypeAccount);
+            thirdBankAccount.PrintAccountInfo();          
 
             Console.ReadKey();
         }

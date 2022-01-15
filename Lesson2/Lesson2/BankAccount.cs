@@ -8,7 +8,13 @@ using System.Text;
 
 2. Изменить класс счет в банке из упражнения таким образом, чтобы номер счета генерировался сам и был уникальным. 
 Для этого надо создать в классе статическую переменную и метод, который увеличивает значение этого переменной.
+
+3. В классе банковский счет удалить методы заполнения полей. Вместо этих методов создать конструкторы. 
+Переопределить конструктор по умолчанию, создать конструктор для заполнения поля баланс, конструктор для 
+заполнения поля тип банковского счета, конструктор для заполнения баланса и типа банковского счета. 
+Каждый конструктор должен вызывать метод, генерирующий номер счета.
 */
+
 
 namespace Lesson2
 {
@@ -21,34 +27,52 @@ namespace Lesson2
 
     public class BankAccount
     {
-        static int accountNumber = 00000001;
+        static int AccountNumber = 1;
 
         private int clientAccountNumber;
         private double balance;
         private TypeAccount typeAccount;
 
-        public void AddAccountNumber()
+        public BankAccount(double balance)
         {
-            clientAccountNumber = accountNumber + 1;
+            clientAccountNumber= GenerateAccountNumber();
+            this.balance = balance;
+            this.typeAccount = TypeAccount.current;
         }
 
-        public int GetAccountNumber()
+        public BankAccount(TypeAccount typeAccount)
         {
-            return this.clientAccountNumber;
+            clientAccountNumber = GenerateAccountNumber();
+            this.typeAccount = typeAccount;
+            this.balance = 0;
         }
+
+        public BankAccount(double balance, TypeAccount typeAccount)
+        {
+            clientAccountNumber = GenerateAccountNumber();
+            this.balance = balance;
+            this.typeAccount = typeAccount;
+        }
+
+        static private int GenerateAccountNumber()
+        {
+            AccountNumber++;
+            return AccountNumber;
+        }
+
         public void AddBalance(double sum)
         {
             balance += sum;
         }
 
+        public int GetAccountNumber()
+        {
+            return clientAccountNumber;
+        }
+
         public double GetAccountBalance()
         {
             return this.balance;
-        }
-
-        public void ChangeTypeAccount(TypeAccount typeAccount)
-        {
-            this.typeAccount = typeAccount;
         }
 
         public string GetTypeAccount()
@@ -61,6 +85,11 @@ namespace Lesson2
                 return "Кредитный";
             else
                 return "Тип счета не определен";
+        }
+
+        public void PrintAccountInfo()
+        {
+            Console.WriteLine($"Новый счет: {clientAccountNumber}. Состояние баланса: {GetAccountBalance()}. Тип счета: {GetTypeAccount()}");
         }
 
     }
