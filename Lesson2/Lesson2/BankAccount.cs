@@ -13,6 +13,8 @@ using System.Text;
 Переопределить конструктор по умолчанию, создать конструктор для заполнения поля баланс, конструктор для 
 заполнения поля тип банковского счета, конструктор для заполнения баланса и типа банковского счета. 
 Каждый конструктор должен вызывать метод, генерирующий номер счета.
+
+4. В классе все методы для заполнения и получения значений полей заменить на свойства. Написать тестовый пример.
 */
 
 
@@ -35,23 +37,23 @@ namespace Lesson2
 
         public BankAccount(double balance)
         {
-            clientAccountNumber= GenerateAccountNumber();
-            this.balance = balance;
-            this.typeAccount = TypeAccount.current;
+            clientAccountNumber = GenerateAccountNumber();
+            Balance = balance;
+            TypeAccount = TypeAccount.current;
         }
 
         public BankAccount(TypeAccount typeAccount)
         {
-            clientAccountNumber = GenerateAccountNumber();
-            this.typeAccount = typeAccount;
-            this.balance = 0;
+            clientAccountNumber = GenerateAccountNumber();            
+            TypeAccount = typeAccount;          
+            Balance = 0;
         }
 
         public BankAccount(double balance, TypeAccount typeAccount)
         {
             clientAccountNumber = GenerateAccountNumber();
-            this.balance = balance;
-            this.typeAccount = typeAccount;
+            Balance = balance;
+            TypeAccount = typeAccount;
         }
 
         static private int GenerateAccountNumber()
@@ -65,6 +67,11 @@ namespace Lesson2
             balance += sum;
         }
 
+
+        public int ClientAccountNumber { get; set; }
+        public double Balance { get; set; }
+        public TypeAccount TypeAccount { get; set; }
+
         public int GetAccountNumber()
         {
             return clientAccountNumber;
@@ -75,21 +82,20 @@ namespace Lesson2
             return this.balance;
         }
 
-        public string GetTypeAccount()
-        {
-            if (typeAccount == TypeAccount.deposit)
-                return "Депозитный";
-            if (typeAccount == TypeAccount.current)
-                return "Расчетный";
-            if (typeAccount == TypeAccount.credit)
-                return "Кредитный";
-            else
-                return "Тип счета не определен";
-        }
-
         public void PrintAccountInfo()
         {
-            Console.WriteLine($"Новый счет: {clientAccountNumber}. Состояние баланса: {GetAccountBalance()}. Тип счета: {GetTypeAccount()}");
+            string _typeAccount;
+
+            if (TypeAccount == TypeAccount.deposit)
+                _typeAccount = "Депозитный";
+            else if (TypeAccount == TypeAccount.current)
+                _typeAccount = "Расчетный";
+            else if (TypeAccount == TypeAccount.credit)
+                _typeAccount = "Кредитный";
+            else
+                _typeAccount = "Тип счета не определен";
+
+            Console.WriteLine($"Новый счет: {clientAccountNumber}. Состояние баланса: {GetAccountBalance()}. Тип счета: {_typeAccount}");
         }
 
     }
