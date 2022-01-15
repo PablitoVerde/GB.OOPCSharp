@@ -9,9 +9,9 @@ namespace Lesson2
             Console.WriteLine("Программа банковских счетов");
 
             BankAccount ba = new BankAccount();
+            ba.AddAccountNumber();
 
-            Console.WriteLine("Введите номер счета");
-            ba.AddAccountNumber(Convert.ToInt32(Console.ReadLine()));
+            Console.WriteLine($"Создан номер счета {ba.GetAccountNumber()}");
 
             Console.WriteLine("Введите баланс");
             ba.AddBalance(Convert.ToDouble(Console.ReadLine()));

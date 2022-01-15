@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 
 /*
-Создать класс счет в банке с закрытыми полями: номер счета, баланс, тип банковского счета (использовать перечислимый тип). 
+1. Создать класс счет в банке с закрытыми полями: номер счета, баланс, тип банковского счета (использовать перечислимый тип). 
 Предусмотреть методы для доступа к данным – заполнения и чтения. Создать объект класса, заполнить его поля и вывести информацию об объекте класса на печать.
+
+2. Изменить класс счет в банке из упражнения таким образом, чтобы номер счета генерировался сам и был уникальным. 
+Для этого надо создать в классе статическую переменную и метод, который увеличивает значение этого переменной.
 */
 
 namespace Lesson2
@@ -18,18 +21,20 @@ namespace Lesson2
 
     public class BankAccount
     {
-        private int accountNumber;
+        static int accountNumber = 00000001;
+
+        private int clientAccountNumber;
         private double balance;
         private TypeAccount typeAccount;
 
-        public void AddAccountNumber(int accountNumber)
+        public void AddAccountNumber()
         {
-            this.accountNumber = accountNumber;
+            clientAccountNumber = accountNumber + 1;
         }
 
         public int GetAccountNumber()
         {
-            return this.accountNumber;
+            return this.clientAccountNumber;
         }
         public void AddBalance(double sum)
         {
