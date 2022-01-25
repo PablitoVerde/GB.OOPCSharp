@@ -51,8 +51,8 @@ namespace FileManager
             long result = 0;
 
             //Пройти по подпапкам и файлам
-            string[] dirs = Directory.GetDirectories(path);
-            string[] files = Directory.GetFiles(path);
+            var dirs = Directory.EnumerateDirectories(path);
+            var files = Directory.EnumerateFiles(path);
 
             //Собрать размер файлов в папке
             foreach (string f in files)

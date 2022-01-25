@@ -15,6 +15,7 @@ namespace FileManager
         private long size; // Размер файла
         private bool isReadOnly; // Атрибут "только чтение"
         private bool isHeaden; // Атрибут "скрытый"
+        private FileInfo fileInformation;
 
         public string Name { get; set; }
         public string FilePath { get; set; }
@@ -22,6 +23,7 @@ namespace FileManager
         public long Size { get; }
         public bool IsReadOnly { get; set; }
         public bool IsHeaden { get; set; }
+        public FileInfo FileInformation { get { return fileInformation; } private set { fileInformation = value; } }
 
         public FileClass()
         {
@@ -38,11 +40,11 @@ namespace FileManager
             FilePath = Path.GetFullPath(path);
             Type = Path.GetExtension(path);
 
-            FileInfo fileInfo = new FileInfo(path);
+            FileInformation = new FileInfo(path);
 
-            Size = fileInfo.Length;
-            IsReadOnly = fileInfo.IsReadOnly;
-            IsHeaden = fileInfo.Attributes.HasFlag(FileAttributes.ReadOnly);
+            Size = FileInformation.Length;
+            IsReadOnly = FileInformation.IsReadOnly;
+            IsHeaden = FileInformation.Attributes.HasFlag(FileAttributes.ReadOnly);
         }
     }
 }

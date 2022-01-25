@@ -13,11 +13,11 @@ namespace Lesson2
             firstBankAccount.PrintAccountInfo();
 
             double secondClientBalance = 5345;
-            TypeAccount secondClientTypeAccount = TypeAccount.current;
+            TypeAccount secondClientTypeAccount = TypeAccount.Current;
             BankAccount secondBankAccount = new BankAccount(secondClientBalance, secondClientTypeAccount);
             secondBankAccount.PrintAccountInfo();
 
-            TypeAccount thirdClientTypeAccount = TypeAccount.deposit;
+            TypeAccount thirdClientTypeAccount = TypeAccount.Deposit;
             BankAccount thirdBankAccount = new BankAccount(thirdClientTypeAccount);                   
             thirdBankAccount.PrintAccountInfo();
 

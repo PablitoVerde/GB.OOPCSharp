@@ -25,14 +25,14 @@ namespace Lesson2
 {
     public enum TypeAccount
     {
-        deposit,
-        current,
-        credit
+        Deposit,
+        Current,
+        Credit
     }
 
     public class BankAccount
     {
-        static int AccountNumber = 1;
+        private static int AccountNumber = 1;
 
         private int clientAccountNumber;
         private double balance;
@@ -42,7 +42,7 @@ namespace Lesson2
         {
             ClientAccountNumber = GenerateAccountNumber();
             Balance = balance;
-            TypeAccount = TypeAccount.current;
+            TypeAccount = TypeAccount.Current;
         }
 
         public BankAccount(TypeAccount typeAccount)
@@ -84,7 +84,7 @@ namespace Lesson2
         }
 
 
-        public int ClientAccountNumber { get; set; }
+        public int ClientAccountNumber { get { return clientAccountNumber; } private set { clientAccountNumber = value; } }
         public double Balance { get; set; }
         public TypeAccount TypeAccount { get; set; }
 
@@ -92,14 +92,22 @@ namespace Lesson2
         {
             string _typeAccount;
 
-            if (TypeAccount == TypeAccount.deposit)
-                _typeAccount = "Депозитный";
-            else if (TypeAccount == TypeAccount.current)
-                _typeAccount = "Расчетный";
-            else if (TypeAccount == TypeAccount.credit)
-                _typeAccount = "Кредитный";
-            else
-                _typeAccount = "Тип счета не определен";
+            switch (TypeAccount)
+            {
+                case TypeAccount.Deposit:
+                    _typeAccount = "Депозитный";
+                    break;
+                case TypeAccount.Current:
+                    _typeAccount = "Расчетный";
+                    break;
+                case TypeAccount.Credit:
+                    _typeAccount = "Кредитный";
+                    break;
+                default:
+                    _typeAccount = "Тип счета не определен";
+                    break;
+
+            }
 
             Console.WriteLine($"Новый счет: {ClientAccountNumber}. Состояние баланса: {Balance}. Тип счета: {_typeAccount}");
         }
