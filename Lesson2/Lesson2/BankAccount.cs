@@ -88,8 +88,32 @@ namespace Lesson2
         public double Balance { get; set; }
         public TypeAccount TypeAccount { get; set; }
 
-        public void PrintAccountInfo()
+        public override bool Equals(object obj)
         {
+            return obj is BankAccount account &&
+                   ClientAccountNumber == account.ClientAccountNumber &&
+                   Balance == account.Balance &&
+                   TypeAccount == account.TypeAccount;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(ClientAccountNumber, Balance, TypeAccount);
+        }
+
+        static public bool operator ==(BankAccount a, BankAccount b)
+        {
+            return a.ClientAccountNumber == b.ClientAccountNumber;
+        }
+
+        static public bool operator !=(BankAccount a, BankAccount b)
+        {
+            return !(a.ClientAccountNumber == b.ClientAccountNumber);
+        }
+
+        public override string ToString()
+        {
+            string result;
             string _typeAccount;
 
             switch (TypeAccount)
@@ -109,8 +133,8 @@ namespace Lesson2
 
             }
 
-            Console.WriteLine($"Новый счет: {ClientAccountNumber}. Состояние баланса: {Balance}. Тип счета: {_typeAccount}");
+            result = ($"Новый счет: {ClientAccountNumber}. Состояние баланса: {Balance}. Тип счета: {_typeAccount}");
+            return result;
         }
-
     }
 }
