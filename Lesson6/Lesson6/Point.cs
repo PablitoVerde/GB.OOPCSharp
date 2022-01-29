@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 
 namespace Lesson6
 {
-    internal class Point : Figure
+    public class Point : Figure
     {
         private int coordinateX;
         private int coordinateY;
 
-        public Point(int coordinateX, int coordinateY)
+        public Point(int coordinateX, int coordinateY, ConsoleColor consoleColor, bool isHeaden) : base(consoleColor, isHeaden)
         {
             CoordinateX = coordinateX;
             CoordinateY = coordinateY;
         }
 
+        //Свойства класса. Имеется проверка на выход при перемещении объекта за границы поля
         public int CoordinateX
         {
             get
@@ -40,12 +41,13 @@ namespace Lesson6
             set
             {
                 if (CoordinateY + value >= 0)
-                    CoordinateY = value;
+                    coordinateY = value;
                 else
                     throw new Exception("Неверная координата");
             }
         }
 
+        //Переопределение методов по перемещению фигуры
         public override void MoveHorizontal(int x)
         {
             CoordinateX = CoordinateX + x;
@@ -54,6 +56,17 @@ namespace Lesson6
         public override void MoveVertical(int y)
         {
             CoordinateY = CoordinateY + y;
+        }
+
+        public virtual double GetArea()
+        {
+            return 0;
+        }
+
+        //Скрытие метода базового класса при сохранении возможности получить информацию из него
+        public new string GetFigureInfo()
+        {
+            return base.GetFigureInfo() + $"Координата Х {CoordinateX}. Координата Y {CoordinateY}.";
         }
     }
 }

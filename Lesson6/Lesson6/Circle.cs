@@ -12,17 +12,19 @@ namespace Lesson6
 
         public double Radius { get { return radius; } set { radius = value; } }
 
-        public Circle(double radius, Point point)
+        public Circle(double radius, int coordinateX, int coordinateY, ConsoleColor consoleColor, bool isHeaden) : base(coordinateX, coordinateY, consoleColor, isHeaden)
         {
             Radius = radius;
-            CoordinateX = point.CoordinateX;
-            CoordinateY = point.CoordinateY;
         }
 
-        public double Area()
+        public override double GetArea()
         {
             return Radius * Radius * Math.PI;
         }
 
+        public new string GetFigureInfo()
+        {
+            return base.GetFigureInfo() + $"Радиус {Radius}.";
+        }
     }
 }

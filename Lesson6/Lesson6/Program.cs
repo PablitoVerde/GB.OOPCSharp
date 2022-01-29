@@ -20,6 +20,33 @@ namespace Lesson6
     {
         static void Main(string[] args)
         {
+            Point p = new Point(5, 5, ConsoleColor.Green, true);
+            Console.WriteLine(p.GetFigureInfo());
+
+            Circle circle = new Circle(4, 8, 14, ConsoleColor.Blue, false);
+            Console.WriteLine(circle.GetFigureInfo());
+
+            Rectangle rectangle = new Rectangle(8, 9, 4, 3, ConsoleColor.Yellow, false);
+            Console.Write(rectangle.GetFigureInfo());
+
+            circle.ChangeColor(ConsoleColor.Red);
+            Console.WriteLine(circle.GetFigureInfo());
+
+            rectangle.ChangeColor(ConsoleColor.Green);
+            Console.WriteLine(rectangle.GetFigureInfo());
+
+            circle.MoveHorizontal(25);
+            circle.MoveVertical(25);
+            Console.WriteLine(circle.GetFigureInfo());
+
+            rectangle.MoveHorizontal(30);
+            rectangle.MoveVertical(30);
+            Console.WriteLine(rectangle.GetFigureInfo());
+
+            Console.WriteLine(circle.GetArea());
+            Console.WriteLine(rectangle.GetArea());
+
+            Console.ReadKey();
 
         }
     }
