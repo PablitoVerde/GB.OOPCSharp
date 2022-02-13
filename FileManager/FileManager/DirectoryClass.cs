@@ -11,7 +11,7 @@ namespace FileManager
         private string name; //Название директории
         private string pathToDirectory; // Путь до директории
         private long size; //Размер директории
-        private bool isHeaden; //Атрибут "скрытый"
+        private bool isHidden; //Атрибут "скрытый"
 
         public string Name { get; set; }
         public string PathToDirectory { get; set; }
