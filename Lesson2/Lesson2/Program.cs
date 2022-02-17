@@ -28,6 +28,17 @@ namespace Lesson2
             firstBankAccount.PrintAccountInfo();
             firstBankAccount.WithdrawFromBalance(5000);
 
+            secondBankAccount.WithdrawFromBalance(5000);
+            secondBankAccount.PrintAccountInfo();
+
+            firstBankAccount.MakeTransaction(secondBankAccount, 300);
+            firstBankAccount.PrintAccountInfo();
+            secondBankAccount.PrintAccountInfo();
+
+            firstBankAccount.MakeTransaction(secondBankAccount, 50);
+            firstBankAccount.PrintAccountInfo();
+            secondBankAccount.PrintAccountInfo();
+
             Console.ReadKey();
         }
     }
