@@ -26,7 +26,7 @@ namespace FileManager
                 return GetDirectorySize(PathToDirectory);
             }
         }
-        public bool IsHeaden { get; set; }
+        public bool IsHidden => isHidden;
 
         public DirectoryClass()
         {
